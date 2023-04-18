@@ -28,7 +28,13 @@ provider:
 custom:
   serverless-offline:
     host: 0.0.0.0
+  webpack:
+    webpackConfig: 'webpack.config.js' # Name of webpack configuration file
+    includeModules: false # Node modules configuration for packaging
+    packager: 'npm' # Packager that will be used to package your external modules
 
+package:
+  individually: true
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
@@ -65,7 +71,7 @@ custom:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: src/handler.handler
     events:
       - http:
           path: hello
@@ -122,4 +128,5 @@ functions:
 #       Description: "Description for the output"
 #       Value: "Some output value"
 plugins:
+  - serverless-webpack
   - serverless-offline
